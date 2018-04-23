@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>注册</title>
+    <link href="__STATIC__/css/bootstrap3.3.6.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__STATIC__/css/common.css">
+    <link rel="stylesheet" href="__STATIC__/css/account.css">
+    <script src="__STATIC__/assets/js/jquery.min.js"></script>
+</head>
+<body class="footer-fix-control-page register-page">
+    <div class="bg-white mt70 container pd0 register-box">
+        <div class="common-box-top top">
+            <div class="font-lg title">注册</div>
+        </div>
+        <div class="register-main">
+            <form class="left-box account-form register-form" id="myForm">
+                <div class="line">
+                    <div class="input-wrapper telephone-wrapper"><img src="__STATIC__/img/icon_account.png" alt=""/><input type="text" class="font-md common-input" name="telephone" id="telephone" placeholder="请输入您的手机号码"/></div>
+                    <label for="telephone" class="font-sm msg-label error"></label>
+                </div>
+                <div class="line">
+                    <div class="input-wrapper password-wrapper"><img src="__STATIC__/img/icon_psw.png" alt=""/><input type="password" class="font-md common-input" name="password" id="password" placeholder="请输入您的密码"/></div>
+                    <label for="password" class="font-sm msg-label error"></label>
+                </div>
+                <div class="line">
+                    <div class="input-wrapper password-wrapper"><img src="__STATIC__/img/icon_psw.png" alt=""/><input type="password" class="font-md common-input" name="again_pwd" id="again_pwd" placeholder="再次请输入您的密码"/></div>
+                    <label for="again_pwd" class="font-sm msg-label error"></label>
+                </div>
+                <span class="font-lg account-submit go-register go-register-can">注册</span>
+            </form>
+            <div class="right-box">
+                <div class="registered-already">已经注册过账号</div>
+                <a class="font-md link-login" href="{:url('Reception/login')}">直接登录</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="brief-tip-pop"><div class="con"></div></div>
+</body>
+<script src="http://cdn.66173.cn/niuguo/scripts/bootstrap3.3.6.min.js"></script>
+<script>
+    var goRegisterTimeout; //登录定时
+    var $label_telephone = $("label[for=telephone]");
+    var $label_confirmpassword = $("label[for=again_pwd]");
+    var $label_password = $("label[for=password]");
+    var regPassword = new RegExp(/^[0-9a-zA-Z!_\-=\+#\.\,\?:;\(\)\[\]\{\}@\$%\^\*`~/\'\"\\]{6,18}$/);
+    var formMsgTip = {
+        telephone: {required: "请输入手机号码", error: "请输入正确的11位手机号码"},
+        password: {required: "请输入密码", error: "请输入6-18位由数字、字母、字符组成的密码"},
+        confirmpassword: {required: "请确认密码", error: "请输入6-18位由数字、字母、字符组成的密码", equalTo: "两次输入密码不一致"},
+    };
+    // 手机号校验
+    var regContact = new RegExp(/^1[34578]\d{9}$/);
+    // 输入时取消该提示
+    $("body").on("input", ".common-input", function(e) {
+        $(e.target).parents(".line").find(".msg-label").html("");
+    });
+    // 同意协议状态改变时取消该提示
+    $("body").on("change", "input[name=agree]", function(e) {
+        $(e.target).parents(".line").find(".msg-label").html("");
+    });
+    // 注册
+    $("body").on("click", ".go-register-can", function(e) {
+        var telephone = $("input[name=telephone]").val();
+        var password = $("input[name=password]").val();
+        var confirmpassword = $("input[name=again_pwd]").val();
+        var agree = $("input[name=agree]").is(":checked");
+        var pass = true;
+        if(!telephone || !regContact.test(telephone)) {
+            pass = false;
+            $label_telephone.html(!telephone ? formMsgTip.telephone.required:formMsgTip.telephone.error);
+        }
+        if(!password || !regPassword.test(password)) {
+            pass = false;
+            $label_password.html(!password ? formMsgTip.password.required:formMsgTip.password.error);
+        }
+        if(!confirmpassword || password !== confirmpassword) {
+            pass = false;
+            $label_confirmpassword.html(!confirmpassword ? formMsgTip.confirmpassword.required:formMsgTip.confirmpassword.equalTo);
+        }
+        if(!pass) {
+            return false;
+        } else {
+            btnTimeOutControl(".go-register", "go-register-can", goRegisterTimeout);
+            $.ajax({
+                "url": "{:url('Reception/do_register')}",
+                "type": "post",
+                "data": {
+                    'mobile': telephone,
+                   'password': password,
+                    'again_pwd':confirmpassword
+                },
+                "dataType": 'json',
+                "success": function (res) {
+                    if(res.code == 0){
+                        briefTipControl(res.msg);
+                        return false;
+                    }else if(res.code == 1){
+                        briefTipControl(res.msg);
+                        window.location.href = "{:url('Reception/index')}";
+                    }
+                }
+            })
+        }
+    });
+
+    // 简单提示控制
+    function briefTipControl(text) {
+        $(".brief-tip-pop .con").html(text);
+        $(".brief-tip-pop").fadeIn(500).delay(1000).fadeOut(500);
+    }
+
+    // 按钮定时加class控制
+    function btnTimeOutControl(ele, cls, timeoutClient, timeout) {
+        clearTimeout(timeoutClient);
+        timeoutClient = setTimeout(function() {
+            $(ele).addClass(cls);
+        }, timeout || 2000);
+    }
+</script>
+
+</html>

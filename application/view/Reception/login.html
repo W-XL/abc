@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>登录</title>
+    <link href="__STATIC__/css/bootstrap3.3.6.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__STATIC__/css/common.css">
+    <link rel="stylesheet" href="__STATIC__/css/index.css">
+    <link rel="stylesheet" href="__STATIC__/css/account.css">
+    <script src="__STATIC__/assets/js/jquery.min.js"></script>
+</head>
+<body class="footer-fix-control-page login-page">
+    <input type="hidden" value="" id="loginCount"/>
+    <div class="top-banner">
+        <img src="__STATIC__/img/login_bg.jpg" alt="">
+        <div class="container main-container">
+            <div class="login-box">
+                <div class="common-box-top top">
+                    <div class="font-lg title">登录</div>
+                    <a class="font-md pull-right link-register" href="{:url('Reception/register')}" target="_blank">快速注册</a>
+                </div>
+                <form class="account-form login-form" id="myForm">
+                    <div class="line">
+                        <div class="input-wrapper account-wrapper"><img src="__STATIC__/img/icon_account.png" alt=""/><input type="text" class="font-md common-input" name="account" id="account" placeholder="请输入您的账号"/></div>
+                        <label for="account" class="font-sm msg-label error"></label>
+                    </div>
+                    <div class="line">
+                        <div class="input-wrapper password-wrapper"><img src="__STATIC__/img/icon_psw.png" alt=""/><input type="password" class="font-md common-input" name="password" id="password" placeholder="请输入您的密码"/></div>
+                        <label for="password" class="font-sm msg-label error"></label>
+                    </div>
+                    <span class="font-lg account-submit go-login go-login-can">登录</span>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="http://cdn.66173.cn/niuguo/scripts/bootstrap3.3.6.min.js"></script>
+</html>

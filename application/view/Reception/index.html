@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="__STATIC__/css/bootstrap3.3.6.min.css" rel="stylesheet">
+<link rel="stylesheet" href="__STATIC__/css/common.css">
+<link rel="stylesheet" href="__STATIC__/css/index.css">
+<script src="__STATIC__/assets/js/jquery.min.js"></script>
+<style>
+    .mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        display: none;
+        cursor: pointer;
+    }
+</style>
+<body>
+<div class="page-top">
+    <div class="top-user-bar">
+        {if $usr_id}
+        <div class="pull-right log-not">
+            <a href="{:url('Reception/new_words')}" target="_blank">生词本</a>
+            <span class="seperator">|</span>
+            <a href="{:url('Reception/do_logout')}">退出</a>
+        </div>
+        {else}
+        <div class="pull-right log-not">
+            <a href="{:url('Reception/login')}" target="_blank">登录</a>
+            <span class="seperator">|</span>
+            <a href="{:url('Reception/register')}">注册</a>
+        </div>
+        {/if}
+    </div>
+    <nav class="main-navbar">
+        <div class="container">
+
+        </div>
+    </nav>
+</div>
+</body>
+<script src="__STATIC__/js/bootstrap3.3.6.min.js"></script>
+</html>
