@@ -70,12 +70,12 @@ class Reception extends Controller{
             exit;
         }
         $array = array('code'=>0,'msg'=>'网络异常');
-        if(!$params['account'] || !$params['password']){
+        if(!$params['mobile'] || !$params['password']){
             $array['msg'] = "请填写必填项";
             return die(json_encode($array));
         }
         $rep_dao = Loader::model('ReceptionDao');
-        $user_info = $rep_dao->get_admin_info($params['account']);
+        $user_info = $rep_dao->get_admin_info($params['mobile']);
         if(!$user_info){
             $array['msg'] = "该手机号尚未注册，无法登录";
             return die(json_encode($array));

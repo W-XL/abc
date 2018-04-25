@@ -16,7 +16,7 @@
     color: #b0b0b0;
 }
 body {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
     color: #333;
     font-family: "微软雅黑";
     min-width: 1200px;
@@ -96,7 +96,7 @@ textarea:focus, input:focus {
     }
 }
 .container {
-    width: 1200px;
+    width: 900px;
 }
 .border-left-title-wrapper {
     border-left: 3px solid #bd2a2a;
@@ -112,10 +112,11 @@ textarea:focus, input:focus {
 }
 .page-top {
     background-color: #f2f2f2;
+    border-bottom: solid 1px #ccc;
 }
 .top-user-bar {
-    height: 30px;
-    line-height: 30px;
+    height: 50px;
+    line-height: 50px;
     width: 1200px;
     margin: auto;
     padding-right: 10px;
@@ -768,4 +769,66 @@ textarea:focus, input:focus {
 }
 .mobile-pop .download-btn {
     background-color: #00a6e7;
+}
+.translate-wrap{
+    margin: 40px 25px 10px 25px;
+}
+.exchange-mask {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    overflow: hidden;
+    background-image: url(//fanyi.bdstatic.com/static/translation/img/translate/translang/exchange1x_37fd099.png);
+    background-image: -webkit-image-set(url(//fanyi.bdstatic.com/static/translation/img/translate/translang/exchange1x_37fd099.png) 1x,url(//fanyi.bdstatic.com/static/translation/img/translate/translang/exchange2x_efb0d9f.png) 2x);
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-top: 5px;
+    background-position: -2px 50%;
+}
+.btn-default{
+    background-color: #5fbeaa !important;
+    border: 1px solid #5fbeaa !important;
+    color: #ffffff !important;
+    padding: 5px 20px;
+}
+.textarea-clear-btn{
+    background-image: url(//fanyi.bdstatic.com/static/translation/pkg/index_z_15cc24c.png);
+}
+
+.textarea-clear-btn {
+    float: right;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+    display: none;
+    background-repeat: no-repeat;
+    background-position: -20px -10px;
+}
+.input-wrap{
+    min-height: 137px;
+    padding: 10px 10px 43px;
+    background-color: #fff;
+    position: relative;
+}
+
+.textarea {
+    border: 0;
+    resize: none;
+    outline: 0;
+    z-index: 3;
+    color: #333;
+    overflow: hidden;
+}
+
+.output-blank {
+    border: 1px solid #eee;
+    border-left: 0;
+    background-color: #f0f0f0;
+    height: 137px;
+}
+
+.output-wrap {
+    min-height: 132px;
+    position: relative;
+    z-index: 9;
 }

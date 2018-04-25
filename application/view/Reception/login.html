@@ -3,10 +3,10 @@
 <head>
     <title>登录</title>
     <link href="__CSS__/bootstrap3.3.6.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="__CSS__/common.css">
+    <link rel="stylesheet" href="__CSS__/common.css?t=1">
     <link rel="stylesheet" href="__CSS__/index.css">
     <link rel="stylesheet" href="__CSS__/account.css">
-    <script src="__STATIC__/assets/js/jquery.min.js"></script>
+    <script src="__STATIC__/assets/js/jquery.min.js?t=1"></script>
 </head>
 <body class="footer-fix-control-page login-page">
     <input type="hidden" value="" id="loginCount"/>
@@ -33,6 +33,7 @@
         </div>
     </div>
 
+    <div class="brief-tip-pop"><div class="con"></div></div>
 </body>
 <script src="__JS__/bootstrap3.3.6.min.js"></script>
 <script>
@@ -47,15 +48,20 @@
     };
     $("body").on("click", ".go-login-can", function(e) {
         var account = $("input[name=account]").val();
+        console.log(account);
         var password = $("input[name=password]").val();
         var pass = true;
         if(!account) {
             pass = false;
             $label_account.html(!account ? formMsgTip.account.required:formMsgTip.account.error);
+        }else{
+            $label_account.html('');
         }
         if(!password || !regPasswordLoose.test(password)) {
             pass = false;
             $label_password.html(!password ? formMsgTip.passwordLoose.required:formMsgTip.passwordLoose.error);
+        }else{
+            $label_password.html('');
         }
         if(!pass) {
             return false;
@@ -94,5 +100,19 @@
             })
         }
     })
+
+    // 简单提示控制
+    function briefTipControl(text) {
+        $(".brief-tip-pop .con").html(text);
+        $(".brief-tip-pop").fadeIn(500).delay(1000).fadeOut(500);
+    }
+
+    // 按钮定时加class控制
+    function btnTimeOutControl(ele, cls, timeoutClient, timeout) {
+        clearTimeout(timeoutClient);
+        timeoutClient = setTimeout(function() {
+            $(ele).addClass(cls);
+        }, timeout || 2000);
+    }
 </script>
 </html>

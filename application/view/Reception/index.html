@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <link href="__STATIC__/css/bootstrap3.3.6.min.css" rel="stylesheet">
-<link rel="stylesheet" href="__STATIC__/css/common.css">
+<link rel="stylesheet" href="__STATIC__/css/common.css?t=1">
 <link rel="stylesheet" href="__STATIC__/css/index.css">
 <script src="__STATIC__/assets/js/jquery.min.js"></script>
 <style>
@@ -38,12 +38,45 @@
         </div>
         {/if}
     </div>
-    <nav class="main-navbar">
-        <div class="container">
-
+</div>
+<div class="minHeight600 container">
+    <div class="translate-wrap">
+        <div class="row text-center">
+        <div class="col-md-3">
+            <input type="text" class="form-control text-center" parsley-trigger="change" required="" name="english_name" data-parsley-id="6" value="英语" readonly="readonly">
         </div>
-    </nav>
+        <div class="col-md-1">
+            <span class="exchange-mask" style="background-position: -202px center;"></span>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control text-center" parsley-trigger="change" required="" name="chinese_name" data-parsley-id="6" value="中文" readonly="readonly">
+        </div>
+        <div class="col-md-1">
+            <span class="btn btn-default btn-sm" >翻 译</span>
+        </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="row">
+           <div class="col-md-6 input-wrap">
+               <a href="###" class="textarea-clear-btn" title="清空" ></a>
+
+               <textarea class="textarea" id="baidu_translate_input" data-height="70" style="height: 70px; overflow: hidden;"></textarea>
+           </div>
+           <div class="col-md-6">
+               <div class="output-wrap output-blank" style="height: 137px;"></div>
+           </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="__STATIC__/js/bootstrap3.3.6.min.js"></script>
+<script>
+    $(".exchange-mask").click(function (){
+        var english = $("input[name='english_name']").val();
+        var chinese = $("input[name='chinese_name']").val();
+        $("input[name='english_name']").val(chinese);
+        $("input[name='chinese_name']").val(english);
+    })
+</script>
 </html>

@@ -1,0 +1,25 @@
+<form action="{:url('Word/do_add')}" method="post" enctype="multipart/form-data" data-toggle="ajaxform" id="myform" class="form-horizontal" role="form" data-animation="modal" data-parsley-validate novalidate>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">单词添加</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-md-3 control-label">单词</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" parsley-trigger="change" required name="word" value="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">主要意思</label>
+            <div class="col-md-9">
+                <textarea name="meaning"  class="form-control" parsley-trigger="change" required></textarea>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-info waves-effect waves-light">保存</button>
+    </div>
+</form>

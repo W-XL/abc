@@ -1,0 +1,60 @@
+<link href="__STATIC__/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
+<link href="__STATIC__/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
+<link href="__STATIC__/assets/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+<script src="__STATIC__/assets/plugins/switchery/dist/switchery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="__STATIC__/assets/plugins/jquery-quicksearch/jquery.quicksearch.js"></script>
+<script src="__STATIC__/assets/plugins/select2/select2.min.js" type="text/javascript"></script>
+<script src="__STATIC__/assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js" type="text/javascript"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box">
+            <div class="row">
+                <!--按钮或搜索区域-->
+                <div class="col-sm-12 text-xs-center">
+                    <div class="col-md-2">
+                        <button data-action="modal" class="btn btn-default m-b-20" href="{:url('Word/add_view')}"><i class="fa fa-plus m-r-5"></i>添加新单词</button>
+                    </div>
+                </div>
+                <!--end--->
+            </div>
+            <div class="table-responsive">
+                <!---核心内容列表区域-->
+                <table class="table m-0 table-hover">
+                    <thead>
+                    <tr class="back_gray">
+                        <th>用户ID</th>
+                        <th>账号</th>
+                        <th>用户名称</th>
+                        <th>所属角色</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <!---内容区域end--->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row"><div class="col-lg-12"><div id="page">{$pages}</div></div></div>
+<script>
+    jQuery(document).ready(function() {
+        setTimeout(function() {
+            $(".select2").select2();
+        }, 1000);
+    });
+    function search() {
+        var user_account = $("#user_account").val();
+        var url = "/account/index?user_name="+user_account;
+        main_data_load(url);
+        return false;
+    }
+    function reloadsearch(){
+        var url = "{:url('Account/index')}";
+        main_data_load(url);
+    }
+</script>
