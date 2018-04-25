@@ -65,6 +65,29 @@ class Reception extends Controller{
 
     public function do_login(){
         $params = Request::instance()->param();
+        if(Session::get('usr_id')){
+            $this->redirect("Reception/index");
+            exit;
+        }
+        $array = array('code'=>0,'msg'=>'网络异常');
+        if(!$params['account'] || !$params['password']){
+            $array['msg'] = "请填写必填项";
+            return die(json_encode($array));
+        }
+        $rep_dao = Loader::model('ReceptionDao');
+        $user_info = $rep_dao->get_admin_info($params['account']);
+        if(!$user_info){
+            $array['msg'] = "该手机号尚未注册，无法登录";
+            return die(json_encode($array));
+        }elseif($user_info['pwd'] != md5($params['password'])){
+            $array['msg'] = "密码错误，请重新输入";
+            return die(json_encode($array));
+        }
+        $array['code'] = 1;
+        $array['msg'] = '登录成功';
+        Session::set('usr_id',$user_info['id']);
+        Session::set('account',$user_info['account']);
+        return die(json_encode($array));
     }
 
 

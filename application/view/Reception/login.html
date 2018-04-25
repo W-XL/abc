@@ -35,4 +35,64 @@
 
 </body>
 <script src="__JS__/bootstrap3.3.6.min.js"></script>
+<script>
+    var goLoginTimeout; //登录定时
+    var $label_account = $("label[for=account]");
+    var $label_password = $("label[for=password]");
+    var regPasswordLoose = new RegExp(/^.{6,18}$/);
+    var formMsgTip = {
+        passwordLoose: {required: "请输入密码", error: "请输入6-18位的密码"},
+        account: {required: "请输入您的账号", error: ""},
+
+    };
+    $("body").on("click", ".go-login-can", function(e) {
+        var account = $("input[name=account]").val();
+        var password = $("input[name=password]").val();
+        var pass = true;
+        if(!account) {
+            pass = false;
+            $label_account.html(!account ? formMsgTip.account.required:formMsgTip.account.error);
+        }
+        if(!password || !regPasswordLoose.test(password)) {
+            pass = false;
+            $label_password.html(!password ? formMsgTip.passwordLoose.required:formMsgTip.passwordLoose.error);
+        }
+        if(!pass) {
+            return false;
+        } else {
+            btnTimeOutControl(".go-login", "go-login-can", goLoginTimeout);
+            var sendData = {
+                mobile: account,
+                password: password
+            };
+            $.ajax({
+                url: "{:url('Reception/do_login')}",
+                type: "post",
+                dataType: "json",
+                data: sendData
+            }).success(function(res) {
+                if(res.code == 0){
+                    briefTipControl(res.msg);
+                    return false;
+                }else if(res.code == 1){
+                    briefTipControl(res.msg);
+                    window.location.href = "{:url('Reception/index')}";
+                }
+
+//                var type = data.type;
+//                var msg = data.msg;
+//                if(data.code == 1){
+//                    window.location.href = "{:url('Reception/index')}";
+//                }
+//                if(type == 1) {
+//                    $label_account.html(msg);
+//                } else if(type == 2) {
+//                    $label_password.html(msg);
+//                }else {
+//                    briefTipControl(msg);
+//                }
+            })
+        }
+    })
+</script>
 </html>
