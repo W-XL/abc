@@ -6,28 +6,32 @@ use think\Db;
 
 class WordDao extends Model{
 
-    public function get_cate_menu($pid){
-        return Db::table('tb_menues')->where('status = 0')->where('pid='.$pid)->select();
+    public function get_word_list(){
+        return Db::table('tb_word_list')->where('is_del = 0')->paginate(20);;
     }
 
-    public function get_admin_info($mobile){
-        return Db::table('tb_admins')
-                ->where('mobile="'.$mobile.'"')
+    public function get_word_info($id){
+        return Db::table('tb_word_list')
+                ->where('id="'.$id.'"')
                 ->find();
     }
 
-    public function insert_admins($params){
-        $data = ['account'=>$params['mobile'],'mobile'=>$params['mobile'],'add_time'=>time(),'pwd'=>md5($params['password'])];
-        $id = Db::name('tb_admins')
+    public function insert_word($params){
+        $data = ['word'=>$params['word'],'meaning'=>$params['meaning'],'add_time'=>time()];
+        $id = Db::name('tb_word_list')
             ->insertGetId($data);
         return $id;
     }
 
-    public function update_menu($params){
-        Db::table('tb_menues')
+    public function update_word($params){
+        Db::table('tb_word_list')
             ->where('id',$params['id'])
-            ->update(['name'=>$params['name'],'pid'=>$params['pid'],'url'=>$params['url'],'status'=>$params['status']]);
+            ->update(['word'=>$params['word'],'meaning'=>$params['meaning']]);
     }
 
-
+    public function delete_word($id){
+        Db::table('tb_word_list')
+            ->where('id',$id)
+            ->update(['is_del'=>1]);
+    }
  }

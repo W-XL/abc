@@ -10,37 +10,28 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-box">
-            <div class="row">
-                <!--按钮或搜索区域-->
-                <div class="col-sm-12 text-xs-center">
-                    <div class="col-md-2">
-                        <button data-action="modal" class="btn btn-default m-b-20" href="{:url('Word/add_view')}"><i class="fa fa-plus m-r-5"></i>添加新单词</button>
-                    </div>
-                </div>
-                <!--end--->
-            </div>
             <div class="table-responsive">
                 <!---核心内容列表区域-->
                 <table class="table m-0 table-hover">
                     <thead>
                     <tr class="back_gray">
-                        <th>NO.</th>
-                        <th>单词</th>
-                        <th>主要意思</th>
-                        <th>添加时间</th>
+                        <th>用户ID</th>
+                        <th>账号</th>
+                        <th>用户名称</th>
+                        <th>所属角色</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {volist name="word_list" id="vo"}
+                    {volist name="list" id="vo"}
                     <tr>
                         <th scope="row">{$vo.id}</th>
-                        <td>{$vo.word}</td>
-                        <td>{$vo.meaning}</td>
-                        <td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+                        <td>{$vo.account}</td>
+                        <td>{$vo.user_name}</td>
+                        <td>{$vo.name}</td>
                         <td>
-                            <a data-action="modal" class=" on-default " href="{:url('Word/edit_view',['id'=>$vo.id])}"><i class="fa fa-pencil"></i></a>
-                            <a data-action="modal" class=" on-default " href="{:url('Word/delete_view',['id'=>$vo.id])}"><i class="fa md-delete"></i></a>
+                            <button data-action="modal" class="btn btn-default m-b-20" href="{:url('Account/modify_pwd',['id'=>$vo.id])}">修改密码</button>
+                            <button data-action="modal" class="btn btn-default m-b-20" href="{:url('Account/edit_view',['id'=>$vo.id])}">编辑</button>
                         </td>
                     </tr>
                     {/volist}

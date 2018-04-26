@@ -98,6 +98,15 @@ class Account extends Controller{
         return succeed_msg();
     }
 
+    public function user_list(){
+        $account_dao = Loader::model('AccountDao');
+        $user_list = $account_dao->get_admin_list();
+        $this->assign('user_list',$user_list);
+        $this->assign('pages',$user_list->render());
+        return view();
+    }
+
+  
 
 
 }

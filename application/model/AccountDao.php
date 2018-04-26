@@ -72,4 +72,8 @@ class AccountDao extends Model{
             Db::table('tb_user_role_access')
                 ->insert(['user_id'=>$user_id,'role_id'=>$params['role_id']]);
         }
+
+        public function get_admin_list(){
+            Db::table('tb_admins')->where('is_del',0)->paginate(20);
+        }
  }
