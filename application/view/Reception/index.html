@@ -19,14 +19,15 @@
         z-index: 99;
         display: none;
         cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
 </style>
-<body>
+<body class="english-dictionary">
 <div class="page-top">
     <div class="top-user-bar">
         {if $usr_id}
         <div class="pull-right log-not">
-            <a href="{:url('Reception/new_words')}" target="_blank">生词本</a>
+            <span class="new-words">生词本</span>
             <span class="seperator">|</span>
             <a href="{:url('Reception/do_logout')}">退出</a>
         </div>
@@ -69,14 +70,60 @@
         </div>
     </div>
 </div>
+<div class="mask">
+    <div class="pop-wrapper">
+        <div class="background-img pop-bg pop-bg-large" style="background-image: url(http://cdn.66173.cn/mobile/css/img/dsgl/pop_bg_large.png)">
+            <a class="close-pop"></a>
+            <div class="pop-title">我的生词本</div>
+            <div class="con">
+                <div class="has-my-gifts">
+                    <ul class="my-gifts-list"></ul>
+                    <div class="btn-zone">
+                        <img class="bt-btn exchange-way-btn" src="http://cdn.66173.cn/mobile/css/img/dsgl/exchange_way_btn.png"/>
+                    </div>
+                </div>
+                <div class="common-width rules-tip">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="brief-tip-pop"><div class="con"></div></div>
+<input type="hidden" name="user_id" id="user_id" value="{$usr_id}"/>
 </body>
 <script src="__STATIC__/js/bootstrap3.3.6.min.js"></script>
 <script>
+    var userId = $("#user_id").val();
     $(".exchange-mask").click(function (){
         var english = $("input[name='english_name']").val();
         var chinese = $("input[name='chinese_name']").val();
         $("input[name='english_name']").val(chinese);
         $("input[name='chinese_name']").val(english);
+    });
+    $('.english-dictionary').on('click','.new-words',function(e){
+        if(!userId){
+            briefTipControl("请先登录");
+        }else{
+            $.ajax({
+                url: "{:url('Reception/new_words')}",
+                type: "post",
+                data:{user_id:userId,pagehash:hash},
+                dataType: "json"
+            }).success(function(res) {
+
+            })
+        }
+    });
+
+    // 点击关闭弹窗
+    $(".close-pop").on("click", function() {
+        $(".english-dictionary .mask").hide();
     })
+
+    // 简单提示控制
+    function briefTipControl(text) {
+        $(".brief-tip-pop .con").html(text);
+        $(".brief-tip-pop").fadeIn(500).delay(1000).fadeOut(500);
+    }
 </script>
 </html>

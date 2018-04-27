@@ -90,6 +90,11 @@ class Reception extends Controller{
         return die(json_encode($array));
     }
 
+    public function new_words(){
+        $user_id = Request::instance()->param('user_id');
+        $rep_dao = Loader::model("ReceptionDao");
+        $new_words = $rep_dao->get_new_words($user_id);
+    }
 
 
 }

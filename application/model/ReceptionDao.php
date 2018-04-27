@@ -29,5 +29,8 @@ class ReceptionDao extends Model{
             ->update(['name'=>$params['name'],'pid'=>$params['pid'],'url'=>$params['url'],'status'=>$params['status']]);
     }
 
+    public function get_new_words($user_id){
+        return Db::query('select * from tb_word_list where find_in_set("'.$user_id.'",user_list)');
+    }
 
  }
