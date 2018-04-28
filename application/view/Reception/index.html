@@ -7,21 +7,8 @@
 <link href="__STATIC__/css/bootstrap3.3.6.min.css" rel="stylesheet">
 <link rel="stylesheet" href="__STATIC__/css/common.css?t=1">
 <link rel="stylesheet" href="__STATIC__/css/index.css">
+<link rel="stylesheet" href="__STATIC__/css/index_v2.css">
 <script src="__STATIC__/assets/js/jquery.min.js"></script>
-<style>
-    .mask {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 99;
-        display: none;
-        cursor: pointer;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-    }
-</style>
 <body class="english-dictionary">
 <div class="page-top">
     <div class="top-user-bar">
@@ -70,22 +57,27 @@
         </div>
     </div>
 </div>
+
 <div class="mask">
     <div class="pop-wrapper">
-        <div class="background-img pop-bg pop-bg-large" style="background-image: url(http://cdn.66173.cn/mobile/css/img/dsgl/pop_bg_large.png)">
+        <div class="background-img pop-bg pop-bg-large" style="background-image: url('../__STATIC__/img/pop_bg_large.png')">
             <a class="close-pop"></a>
             <div class="pop-title">我的生词本</div>
             <div class="con">
-                <div class="has-my-gifts">
-                    <ul class="my-gifts-list"></ul>
-                    <div class="btn-zone">
-                        <img class="bt-btn exchange-way-btn" src="http://cdn.66173.cn/mobile/css/img/dsgl/exchange_way_btn.png"/>
-                    </div>
-                </div>
-                <div class="common-width rules-tip">
+                <div class="has-my-gifts"><ul class="my-gifts-list"></ul></div>
+            </div>
+        </div>
+        <div class="background-img pop-bg pop-bg-small" style="background-image: url('../__STATIC__/img/pop_bg_small.png')">
+            <a class="close-pop"></a>
+            <div class="pop-title">我的生词本</div>
+            <div class="con">
+                <div class="no-my-gifts">
+                    <img src="__STATIC__/img/no_sad.png" class="no-sad-img"/>
+                    <div class="msg">您当前还没有添加生词哦</div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <div class="brief-tip-pop"><div class="con"></div></div>
@@ -105,15 +97,43 @@
             briefTipControl("请先登录");
         }else{
             $.ajax({
-                url: "{:url('Reception/new_words')}",
-                type: "post",
-                data:{user_id:userId,pagehash:hash},
-                dataType: "json"
+                "url": "{:url('Reception/new_words')}",
+                "type": "post",
+                "data":{user_id:userId},
+                "dataType": "json"
             }).success(function(res) {
+                var data = res.new_words;
+                if(res.code == '0'){
+                    briefTipControl(res.msg);
+                    return false;
+                }else if(data && data.length !=0){
+                    newWords(data);
+                }else{
+                    popControl(".pop-bg-small", ".no-my-gifts", '我的生词本');
+                }
 
             })
         }
     });
+
+    function newWords(data) {
+        var popTitle = "我的生词本";
+        if (data &&  data!= 0) {
+            var content = '';
+            for (var i = 0, l = data.length; i < l; i++) {
+                var item = data[i];
+                content += '<li>'
+                    + '<div class="left">'+ item['word']+'</div>'
+                    + '<div class="right">'
+                    + '<div class="text-overflow title">' + item['meaning'] + '</div>'
+
+                content +='</div></li>';
+
+            }
+            $(".my-gifts-list").html(content);
+            popControl(".pop-bg-large", ".has-my-gifts", popTitle);
+        }
+    }
 
     // 点击关闭弹窗
     $(".close-pop").on("click", function() {
@@ -125,5 +145,38 @@
         $(".brief-tip-pop .con").html(text);
         $(".brief-tip-pop").fadeIn(500).delay(1000).fadeOut(500);
     }
+
+    // 弹窗控制
+    function popControl(popParentClass, popClass, popTitle) {
+        $(popParentClass).show().siblings().hide();
+        $(popClass).show().siblings().hide();
+        $(".pop-bg .pop-title").html(popTitle);
+        $(".english-dictionary .mask").show();
+        popSize();
+        // alert("mask"+$(".mask").height()+"pop-bg top"+$(".pop-bg-small").offset().top + "pop-small-height"+$(".pop-bg-small").height()+"window.screen.availHeight"+window.screen.availHeight+"screen height"+window.screen.height);
+    }
+
+    function popSize() {
+        // 大弹窗高度
+        $(".pop-bg-large").css("height", $(".pop-bg-large").width()*0.874);
+        // 小弹窗高度
+        $(".pop-bg-small").css("height", $(".pop-bg-small").width()*0.756);
+        // document.body.clientHeight
+        var minH = Math.min($(".mask").height(),window.screen.availHeight,window.screen.height);
+        $(".pop-bg").css("top", (minH-$(".pop-bg:visible").height())/2 + 'px');
+        // $(".pop-bg").css("top", ($(".mask").height()-$(".pop-bg:visible").height())/2 + 'px');
+        // 关闭弹窗按钮高度
+        var closeWidth = $(".pop-bg .close-pop:visible").width();
+        $(".pop-bg .close-pop").css("height", closeWidth);
+        // 弹窗标题高度和行高与关闭弹窗按钮相同
+        $(".pop-bg .pop-title").css({
+            "height": closeWidth,
+            "line-height": closeWidth + 'px'
+        });
+        $(".share-collect-zone").css("height", $(".share-collect-zone").width()*0.559);
+        $(".share-collect-zone").css("top", (minH-$(".share-collect-zone").height())/2 + 'px');
+        $(".my-gifts-list .center").css("height",$(".my-gifts-list .gift-img-bg").height() + 'px');
+    }
+
 </script>
 </html>

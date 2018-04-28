@@ -1,0 +1,533 @@
+
+a {
+    color: #aaa;
+    text-decoration: none;
+    outline: none;
+}
+
+a:hover,a:active,a:focus {
+    text-decoration: none;
+}
+.font-lger {
+    font-size: 0.47rem;
+}
+.font-lg {
+    font-size: 0.4rem;
+}
+.font-mder {
+    font-size: 0.33rem;
+}
+.font-md {
+    font-size: 0.27rem;
+}
+.font-sm {
+    font-size: 0.2rem;
+}
+.font-tiny {
+    font-size: 0.13rem;
+}
+
+.english-dictionary {
+	position: relative;
+}
+.text-overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.background-img {
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.place-center {
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+.sec {
+	font-size: 0;
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
+	
+}
+.w100 {
+	width: 100%;
+}
+.inline-block-middle {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/*sec1部分*/
+.block-bg {
+	width: 100%;
+}
+.link-download-game {
+	position: absolute;
+	width: 55%;
+	top: 45.7%;
+}
+.self-rel-zone {
+	position: absolute;
+	top: 58.1%;
+	text-align: center;
+}
+/*.log-not {*/
+	/*color: #c00000;*/
+/*}*/
+.log-already, .log-out-link {
+	color: #a45f0f;
+}
+.self-rel-zone .log-out-link {
+	margin: 0 0.5rem;
+}
+.login-in-link, .my-bag-btn {
+	cursor: pointer;
+}
+.share-get-zone {
+	position: absolute;
+	top: 91.1%;
+	text-align: center;
+}
+.share-get-zone img {
+	vertical-align: middle;
+	display: inline-block;
+}
+.share-get-zone .share-btn {
+	width: 60%;
+	margin-right: 4%;
+	cursor: pointer;
+}
+.share-get-zone .get-btn, .share-get-zone .get-already-btn {
+	width: 30.7%;
+	cursor: pointer;
+}
+/*sec2部分*/
+/*游戏截图*/
+.shot-zone {
+	position: absolute;
+	top: 9%;
+}
+.shot-zone .img-zone {
+	width: 62%;
+	margin: auto;
+}
+.shot-zone .img-zone img {
+	width: 100%;
+	display: none;
+}
+.shot-zone .img-zone img.active {
+	display: block;
+}
+.shot-zone .dot-zone {
+	text-align: center;
+	margin-top: 0.1rem;
+	font-size: 0;
+}
+.shot-zone .dot-zone li {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0.2rem;
+	height: 0.2rem;
+	margin: 0 0.05rem;
+	background-color: #faf3d0;
+	border-radius: 50%;
+
+}
+.shot-zone .dot-zone li.active {
+	background-color: #7a4d06;
+}
+/*游戏视频*/
+.video-zone {
+	position: absolute;
+	width: 68%;
+	z-index: 9;
+	top: 59.5%;
+	font-size: 0;
+}
+.poster {
+	position: absolute;
+    width: 102%;
+    height: 102%;
+    z-index: 1;
+    cursor: pointer;
+    left: -1%;
+    top: -1%;
+}
+/*sec3部分*/
+.strategy-zone {
+	/*position: absolute;
+	width: 100%;
+	top: 0;*/
+}
+.strategy-list {
+	list-style: none;
+	font-size: 0;
+}
+.strategy-list li:first-child {
+	border-top: none;
+}
+.strategy-list li {
+	padding: 2% 3%;
+	border-bottom: 1px solid #bb832b;
+}
+.strategy-list li a {
+	display: block;
+}
+.strategy-list .game-img {
+	display: inline-block;
+	width: 35%;
+	vertical-align: top;
+}
+.strategy-list .center {
+	display: inline-block;
+	width: 62%;
+	margin-left: 1%;
+	position: relative;
+	color: #47433e;
+}
+.strategy-list .title {
+	/*font-size: 14px;*/
+	font-weight: 500;
+	color: #333;
+}
+.strategy-list .desc {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	height: 0.56rem;
+	line-height: 0.29rem;
+	/*font-size: 10px;*/
+	position: absolute;
+	top: 32%;
+}
+.strategy-list .time {
+	position: absolute;
+	bottom: 0;
+	/*font-size: 10px;*/
+}
+.get-more-strategy {
+	text-align: center;
+	padding: 0.3rem 0 0;
+	margin-bottom: 0.4rem;
+}
+/*sec4部分*/
+.sec4 {
+	padding: 0.4rem 0 0.5rem
+}
+.for-more-qrcode {
+	width: 42.6%;
+	margin: 0 auto 0.5rem;
+	display: block;
+
+}
+.qr-zone {
+	text-align: center;
+}
+.qr-zone img {
+	display: inline-block;
+	vertical-align: middle;
+	width: 31.3%;
+}
+.qr-zone img.weibo {
+	margin-right: 20%;
+}
+.rule-zone {
+	padding: 0.3rem 0.4rem 0;
+}
+.rule-zone .rules {
+	padding: 0.1rem 0.1rem 0;
+}
+.english-dictionary .mask{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 99;
+	display: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.pop-wrapper {
+	max-width: 550px;
+	position: relative;
+	margin: auto;
+}
+.pop-bg {
+	margin: auto;
+	width: 91.2%;
+	position: absolute;
+	left: 50%;
+	margin-left: -45.6%;
+	padding-top: 3%;
+	box-sizing: border-box;
+}
+.pop-bg-large {
+
+}
+.pop-bg-small {
+	position: relative;
+}
+/*分享弹窗*/
+.share-collect-zone {
+	margin: auto;
+	width: 94%;
+	position: absolute;
+	left: 50%;
+	margin-left: -47%;
+	position: relative;
+}
+.share-choose-zone {
+	position: absolute;
+	top: 0;
+	margin-top: 10%;
+	height: 25.5%;
+	width: 100%;
+	white-space: nowrap;
+}
+.share-choose-zone .share-link-block {
+	display: inline-block;
+	text-align: center;
+	height: 100%;
+	width: 25%;
+}
+.share-choose-zone .share-link-block:first-child {
+	margin-left: 0;
+}
+.share-choose-zone .share-link-item {
+	display: inline-block;
+	height: 100%;
+	width: 57%;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+.link-copy-btn {
+	cursor: pointer;
+}
+.cancel-share-btn {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 24.5%;
+	cursor:pointer;
+}
+
+.pop-bg-large .close-pop {
+	position: absolute;
+	top: 3%;
+	right: 4%;
+	width: 12%;
+}
+.pop-bg-small .close-pop {
+	position: absolute;
+	top: 4%;
+	right: 4%;
+	width: 14%;
+}
+.pop-bg .pop-title {
+	text-align: center;
+	color: #debc71;
+	font-size: 20px;
+}
+.pop-bg .con {
+	color: #e4c376;
+	font-size: 0;
+}
+.pop-bg-large .con{
+	max-height: 78%;
+	overflow: auto;
+	margin-top: 2%;
+}
+/*弹窗我的礼包列表*/
+.my-gifts-list {
+	width: 83%;
+	margin: 2% auto 0;
+}
+.my-gifts-list li {
+	position: relative;
+	margin: 1.5% 0;
+}
+.my-gifts-list .gift-img-bg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 19.2%;
+}
+.my-gifts-list .gift-img {
+	display: inline-block;
+	vertical-align: top;
+	width: 16%;
+	margin-left: 1.6%;
+	margin-top: 1.6%;
+	position: relative;
+}
+.my-gifts-list .center {
+	display: inline-block;
+	width: 50%;
+	margin-left: 2.6%;
+	position: relative;
+	min-height: 1rem;
+}
+.my-gifts-list .right-longer .center {
+	width: 70%;
+}
+.my-gifts-list .title {
+	padding-left: 2%;
+	font-size: 15px;
+}
+.my-gifts-list .gift-code {
+	width: 100%;
+	padding-left: 4%;
+	font-size: 12px;
+	color: white;
+	line-height: 2;
+	position: absolute;
+	bottom: 0;
+}
+.my-gifts-list .wait-code {
+	color: #73514d;
+}
+.my-gifts-list .gift-pop-copy-btn {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-top: 7.9%;
+	width: 22.8%;
+}
+/*弹窗活动规则*/
+.rules-tip {
+	width: 87.7%;
+	margin: 0 auto;
+	padding-top: 2%;
+	line-height: 1.8;
+}
+/*弹窗无礼包,弹窗未抽中*/
+.no-my-gifts, .out-pop, .not-share-pop {
+	margin: 8% auto 2%;
+	font-size: 16px;
+	text-align: center;
+	width: 80%;
+}
+.no-sad-img {
+	width: 19%;
+}
+.no-my-gifts .msg {
+	margin-top: 0.3rem;
+}
+/*抽奖弹窗*/
+.has-prize-pop {
+	margin-top: 15%;
+	text-align: center;
+}
+/*弹窗底部的按钮公用部分*/
+.pop-bg-small .msg-title {
+	font-size: 18px;
+	line-height: 2;
+}
+.pop-bg-small .msg-con {
+	font-size: 14px;
+	line-height: 2;
+}
+.pop-bg-small .btn-zone {
+	position: absolute;
+	width: 100%;
+	bottom: 8%;
+	left: 0;
+	text-align: center;
+}
+.pop-bg-small .btn-zone .bt-btn {
+	width: 25%;
+	margin: 0 5%;
+	cursor: pointer;
+}
+.link-detail-to-app {
+	display: inline-block;
+}
+.link-detail-to-app img {
+	width: 100%;
+}
+/*弹窗表单填写*/
+.pop-form-wrap {
+	width: 80%;
+	margin: 5% auto 0;
+	white-space: nowrap;
+}
+.pop-form-line {
+	margin-bottom: 5%;
+}
+.pop-form-line label {
+	display: inline-block;
+	padding-right: 0.1rem;
+	font-size: 14px;
+	vertical-align: top;
+}
+.pop-form-line input {
+	width: 55%;
+	display: inline-block;
+	font-size: 12px;
+	color: #8b8371;
+	padding: 8px 0 8px 10px;
+	box-sizing: border-box;
+	margin-top: -5px;
+	background-color: #3b140f;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+.pop-form-line .captcha-tip {
+	font-size: 10px;
+	color: #5f4028;
+	padding-left: 0.05rem;
+}
+.pop-form-line .captcha-tip.to-get-captcha {
+	color: #e4c376;
+	cursor: pointer;
+}
+.pop-form-line .tel-input:disabled {
+	color: #ddd;
+}
+/*只有两个填写项时布局分散点*/
+.to-login-pop .pop-form-wrap, .tel-preorder-pop .pop-form-wrap {
+	margin-top: 10%;
+}
+.to-login-pop .pop-form-line, .tel-preorder-pop .pop-form-line {
+	margin-bottom: 10%;
+}
+/*简单提示*/
+.brief-tip-pop {
+	position: fixed;
+	top: 45%;
+	z-index: 999;
+	left: 0;
+	right: 0;
+	text-align: center;
+	display: none;
+	word-break: break-all;
+}
+.brief-tip-pop .con{
+	background: rgba(0,0,0,0.6);
+	color: white;
+	max-width: 40%;
+	padding: 5px 10px;
+	display: inline-block;
+}
+
+/*微信内置浏览器中引导微信分享*/
+.wx-share-mask .wx-share-arrow {
+	text-align: right;
+	padding-right: 0.4rem;
+	margin-bottom: 0.5rem;
+}
+.wx-share-mask .wx-share-arrow img {
+	width: 2rem;
+}
+.wx-share-mask .wx-share-text {
+	text-align: center;
+}
+.wx-share-mask .wx-share-text img {
+	width: 3rem;
+}
