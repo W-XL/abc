@@ -40,20 +40,32 @@
             <input type="text" class="form-control text-center" parsley-trigger="change" required="" name="chinese_name" data-parsley-id="6" value="中文" readonly="readonly">
         </div>
         <div class="col-md-1">
-            <span class="btn btn-default btn-sm" >翻 译</span>
+            <span class="btn btn-default btn-sm" id="translate">翻 译</span>
         </div>
         </div>
     </div>
-    <div class="">
+    <div>
         <div class="row">
            <div class="col-md-6 input-wrap">
                <a href="###" class="textarea-clear-btn" title="清空" ></a>
-
-               <textarea class="textarea" id="baidu_translate_input" data-height="70" style="height: 70px; overflow: hidden;"></textarea>
+               <textarea class="textarea" id="translate_input" data-height="70" style="height: 70px; overflow: hidden;"></textarea>
            </div>
            <div class="col-md-6">
-               <div class="output-wrap output-blank" style="height: 137px;"></div>
+               <div class="output-wrap output-blank" ></div>
            </div>
+        </div>
+    </div>
+    <br>
+    <div class="similar-words">
+        <h3>相似词语</h3>
+        <div class="table-responsive">
+            <!---核心内容列表区域-->
+            <table class="table m-0 table-hover">
+                <tbody class="similar-list">
+
+                </tbody>
+            </table>
+            <!---内容区域end--->
         </div>
     </div>
 </div>
@@ -123,7 +135,7 @@
             for (var i = 0, l = data.length; i < l; i++) {
                 var item = data[i];
                 content += '<li>'
-                    + '<div class="left">'+ item['word']+'</div>'
+                    + '<div class="left"><div class="title">'+ item['word']+'</div></div>'
                     + '<div class="right">'
                     + '<div class="text-overflow title">' + item['meaning'] + '</div>'
 
@@ -145,7 +157,6 @@
         $(".brief-tip-pop .con").html(text);
         $(".brief-tip-pop").fadeIn(500).delay(1000).fadeOut(500);
     }
-
     // 弹窗控制
     function popControl(popParentClass, popClass, popTitle) {
         $(popParentClass).show().siblings().hide();
@@ -178,5 +189,88 @@
         $(".my-gifts-list .center").css("height",$(".my-gifts-list .gift-img-bg").height() + 'px');
     }
 
+    //清空
+    $(".textarea-clear-btn").on("click",function(){
+        $("#translate_input").val("");
+        $(".output-blank").html("");
+        $(".textarea-clear-btn").hide();
+        $('.similar-words').hide();
+    });
+
+    $("#translate_input").keydown(function (){
+        $(".textarea-clear-btn").show();
+    });
+
+    //翻译
+    $('.english-dictionary').on('click','#translate',function(e){
+        var text = $('#translate_input').val();
+        if(!text){
+            briefTipControl("请先输入需要翻译内容");
+        }else {
+            $.ajax({
+                "url": "{:url('Reception/translate')}",
+                "type": "post",
+                "data": {text: text},
+                "dataType": "json"
+            }).success(function (res) {
+                var list = res.similar_words;
+                var only_word = res.only_word;
+                var content ='';
+                if(res.code == 0){
+                    briefTipControl(res.msg);
+                    return false;
+                }else{
+                    if(list && list.length != 0){
+                        for(var i=0;i<list.length ;i++) {
+                            content = " <tr>" +
+                                " <th scope=\"row\">"+ (parseInt(i)+parseInt(1))+"</th>" +
+                                " <td>"+ list[i]['word']+"</td>" +
+                                "<td>"+ list[i]['meaning']+"</td>" +
+                                "<td class=\"add_new_word\"><sapn class=\"btn btn-default btn-sm\" onclick=\"add_new_word("+ list[i]['id']+")\">加入生词本</sapn></td>" +
+                                "</tr>";
+                        }
+                    }else{
+                        content = "未查询到相似词语";
+                    }
+                    if(res.only_word){
+                        if(res.type ==1) {
+                            $(".output-blank").html(only_word.word);
+                        }else{
+                            $(".output-blank").html(only_word.meaning);
+                        }
+                    }else{
+                        $(".output-blank").html(res.text);
+                        briefTipControl("库存中未找到该词语");
+                    }
+                    if(res.type ==1){
+                        $("input[name='english_name']").val("中文");
+                        $("input[name='chinese_name']").val("英语");
+                    }else{
+                        $("input[name='english_name']").val("英语");
+                        $("input[name='chinese_name']").val("中文");
+                    }
+                    $(".similar-list").html(content);
+                    $('.similar-words').show();
+                }
+            })
+        }
+    })
+
+    //添加至生词本
+    function add_new_word(id){
+        if(!id){
+            briefTipControl('生词ID出错啦');
+            return false;
+        }else{
+            $.ajax({
+                "url": "{:url('Reception/add_new_word')}",
+                "type": "post",
+                "data": {word_id: id},
+                "dataType": "json"
+            }).success(function (res) {
+                briefTipControl(res.msg);
+            })
+        }
+    }
 </script>
 </html>

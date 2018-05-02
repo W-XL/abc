@@ -91,14 +91,76 @@ class Reception extends Controller{
     }
 
     public function new_words(){
+        $array = array('code'=>0,'msg'=>"网络错误");
         $user_id = Request::instance()->param('user_id');
+        if(!$user_id){
+            $array['msg'] = "请先登录";
+            die(json_encode($array));
+        }
         $rep_dao = Loader::model("ReceptionDao");
         $new_words = $rep_dao->get_new_words($user_id);
-//        var_dump($new_words);
         $array['code'] = 1;
         $array['new_words'] = $new_words;
-
         return die(json_encode($array));
+    }
+
+    public function translate(){
+        $array = array('code'=>0,'msg'=>'网络错误');
+        $text = Request::instance()->param('text');
+        if(!$text){
+            $array['msg'] = '请先输入需要翻译的词语';
+            die(json_encode($array));
+        }
+        $rep_dao = Loader::model("ReceptionDao");
+        if(preg_match("/[\x7f-\xff]/", $text)){
+            $only_word = $rep_dao->get_chinese_word($text);
+            $type = 1;
+        }elseif (preg_match('/[a-zA-Z]/',$text)){
+            $only_word = $rep_dao->get_english_word($text);
+            $type = 2;
+        }else{
+            $array['msg'] = "输入的词语有误";
+            die(json_encode($array));
+        }
+        $similar_words = $rep_dao->get_aimilar_words($text,$type);
+        $array['code'] = 1;
+        $array['msg'] = '查询成功';
+        $array['text'] = $text;
+        $array['type'] = $type;
+        $array['only_word'] = $only_word;
+        $array['similar_words'] = $similar_words;
+        die(json_encode($array));
+    }
+
+    public function add_new_word(){
+        $array = array("code"=>0,'msg'=>"网络错误");
+        if(!Session::get('usr_id')){
+            $array['msg'] = "请先登录";
+            die(json_encode($array));
+        }
+        $id = Request::instance()->param('word_id');
+        if(!$id){
+            $array['msg'] = "单词ID错误啦";
+            die(json_encode($array));
+        }
+        $rep_dao = Loader::model('ReceptionDao');
+        $info = $rep_dao->get_new_word_info($id,Session::get('usr_id'));
+
+        if($info){
+            $array['msg'] = "该单词已经在你的生词本中咯";
+            die(json_encode($array));
+        }else{
+            $word_info = $rep_dao->gwt_word_info($id);
+            if($word_info["user_list"] ){
+                $user_list = $word_info['user_list'].','.Session::get('usr_id');
+            }else{
+                $user_list = Session::get('usr_id');
+            }
+            $rep_dao->update_new_list($id,$user_list);
+        }
+        $array['code'] = 1;
+        $array['msg'] = "成功添加到生词本";
+        die(json_encode($array));
     }
 
 

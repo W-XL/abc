@@ -33,4 +33,47 @@ class ReceptionDao extends Model{
         return Db::query('select * from tb_word_list where find_in_set("'.$user_id.'",user_list)');
     }
 
+    public function get_chinese_word($text){
+        return Db::table('tb_word_list')
+                ->where('meaning like "%'.$text.'%"')
+                ->where('is_del',0)
+                ->find();
+    }
+
+    public function get_english_word($text){
+        return Db::table('tb_word_list')
+                ->where('word',$text)
+                ->where('is_del',0)
+                ->find();
+    }
+
+    public function get_aimilar_words($text,$type){
+        if($type == 1){
+            $data = Db::table('tb_word_list')
+                    ->where('meaning like "%'.$text.'%"')
+                    ->select();
+        }else{
+            $data = Db::table('tb_word_list')
+                ->where('word like "%'.$text.'%"')
+                ->select();
+        }
+        return $data;
+    }
+
+    public function get_new_word_info($id,$user_id){
+       return Db::query('select * from tb_word_list where find_in_set("'.$user_id.'",user_list) and id = '.$id);
+    }
+
+    public function gwt_word_info($id){
+        return Db::table('tb_word_list')
+                ->where('id',$id)
+                ->find();
+    }
+
+    public function update_new_list($id,$user_list){
+        Db::table('tb_word_list')
+            ->where('id',$id)
+            ->update(['user_list'=>$user_list]);
+    }
+
  }

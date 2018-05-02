@@ -809,6 +809,7 @@ textarea:focus, input:focus {
     padding: 10px 10px 43px;
     background-color: #fff;
     position: relative;
+    border: 1px solid #dedede;
 }
 
 .textarea {
@@ -816,6 +817,7 @@ textarea:focus, input:focus {
     resize: none;
     outline: 0;
     z-index: 3;
+    width:90%;
     color: #333;
     overflow: hidden;
 }
@@ -825,6 +827,7 @@ textarea:focus, input:focus {
     border-left: 0;
     background-color: #f0f0f0;
     height: 137px;
+    padding:10px;
 }
 
 .output-wrap {

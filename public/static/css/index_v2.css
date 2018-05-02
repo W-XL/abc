@@ -254,9 +254,16 @@ a:hover,a:active,a:focus {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .pop-wrapper {
-	max-width: 550px;
+	max-width: 700px;
 	position: relative;
 	margin: auto;
+}
+.similar-words{
+	display: none;
+}
+.add_new_word{
+	width:150px;
+	text-align:center;
 }
 .pop-bg {
 	margin: auto;
@@ -357,17 +364,14 @@ a:hover,a:active,a:focus {
 	top: 0;
 	width: 19.2%;
 }
-.my-gifts-list .gift-img {
+.my-gifts-list .right {
 	display: inline-block;
-	vertical-align: top;
-	width: 16%;
-	margin-left: 1.6%;
-	margin-top: 1.6%;
+	width: 70%;
 	position: relative;
 }
-.my-gifts-list .center {
+.my-gifts-list .left {
 	display: inline-block;
-	width: 50%;
+	width: 25%;
 	margin-left: 2.6%;
 	position: relative;
 	min-height: 1rem;

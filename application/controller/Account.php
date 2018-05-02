@@ -106,7 +106,7 @@ class Account extends Controller{
         return view();
     }
 
-  
+
 
 
 }
