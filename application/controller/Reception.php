@@ -13,6 +13,7 @@ class Reception extends Controller{
 
     public function index(){
         $this->assign('usr_id',Session::get('usr_id'));
+        $this->assign('account',Session::get('account'));
         return $this->fetch();
     }
 
@@ -70,14 +71,14 @@ class Reception extends Controller{
             exit;
         }
         $array = array('code'=>0,'msg'=>'网络异常');
-        if(!$params['mobile'] || !$params['password']){
+        if(!$params['account'] || !$params['password']){
             $array['msg'] = "请填写必填项";
             return die(json_encode($array));
         }
         $rep_dao = Loader::model('ReceptionDao');
-        $user_info = $rep_dao->get_admin_info($params['mobile']);
+        $user_info = $rep_dao->get_admin_info($params['account']);
         if(!$user_info){
-            $array['msg'] = "该手机号尚未注册，无法登录";
+            $array['msg'] = "该用户名不存在，无法登录";
             return die(json_encode($array));
         }elseif($user_info['pwd'] != md5($params['password'])){
             $array['msg'] = "密码错误，请重新输入";

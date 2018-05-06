@@ -10,9 +10,9 @@ class ReceptionDao extends Model{
         return Db::table('tb_menues')->where('status = 0')->where('pid='.$pid)->select();
     }
 
-    public function get_admin_info($mobile){
+    public function get_admin_info($account){
         return Db::table('tb_admins')
-                ->where('mobile="'.$mobile.'"')
+                ->where('account="'.$account.'"')
                 ->find();
     }
 

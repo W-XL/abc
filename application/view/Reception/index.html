@@ -14,6 +14,8 @@
     <div class="top-user-bar">
         {if $usr_id}
         <div class="pull-right log-not">
+            <span>Hi {$account}</span>
+            <span class="seperator"></span>
             <span class="new-words">生词本</span>
             <span class="seperator">|</span>
             <a href="{:url('Reception/do_logout')}">退出</a>
@@ -222,7 +224,7 @@
                 }else{
                     if(list && list.length != 0){
                         for(var i=0;i<list.length ;i++) {
-                            content = " <tr>" +
+                            content += " <tr>" +
                                 " <th scope=\"row\">"+ (parseInt(i)+parseInt(1))+"</th>" +
                                 " <td>"+ list[i]['word']+"</td>" +
                                 "<td>"+ list[i]['meaning']+"</td>" +
